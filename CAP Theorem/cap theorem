@@ -1,0 +1,33 @@
+           					
+
+					CAP Theorem
+
+
+
+Consistency:
+
+MongoDB is strongly consistent when you use a single connection or the correct Write/Read Concern Level (Which will cost you execution speed). As soon as you don't meet those conditions (especially when you are reading from a secondary-replica) MongoDB becomes Eventually Consistent.
+
+Availability:
+
+MongoDB gets high availability through Replica-Sets. As soon as the primary goes down or gets unavailable else, then the secondaries will determine a new primary to become available again. There is an disadvantage to this: Every write that was performed by the old primary, but not synchronized to the secondaries will be rolled back and saved to a rollback-file, as soon as it reconnects to the set(the old primary is a secondary now). So in this case some consistency is sacrificed for the sake of availability.
+
+Partition Tolerance:
+
+Through the use of said Replica-Sets MongoDB also achieves the partition tolerance: As long as more than half of the servers of a Replica-Set is connected to each other, a new primary can be chosen. Why? To ensure two separated networks can not both choose a new primary. When not enough secondaries are connected to each other you can still read from them (but consistency is not ensured), but not write. The set is practically unavailable for the sake of consistency.
+
+    Scenario                   | Main Focus | Description
+    ---------------------------|------------|------------------------------------
+    No partition               |     CA     | The system is available 
+                               |            | and provides strong consistency
+    ---------------------------|------------|------------------------------------
+    partition,                 |     AP     | Not synchronized writes 
+    majority connected         |            | from the old primary are ignored                
+    ---------------------------|------------|------------------------------------
+    partition,                 |     CP     | only read access is provided
+    majority not connected     |            | to avoid separated and inconsistent systems
+
+
+
+
+
