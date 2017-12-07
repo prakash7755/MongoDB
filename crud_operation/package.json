@@ -1,13 +1,14 @@
 {
-  "name": "test",
+  "name": "crud_operation",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "schema.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "prakash",
-  "license": "ISC",
+  "author": "Prakash",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
